@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="myApp" ng-controller="AppController">
   <head>
-    <title>Hi</title>
+    <title>{{ getPageTitle() }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"/>
@@ -20,5 +20,7 @@
       <main ui-view></main>
       <% include footers/footer.ejs %>
     </div>
+    <script src="/javascripts/contact.js"></script>
+    <script src="/javascripts/menu.js"></script>
   </body>
 </html>

@@ -1,0 +1,155 @@
+<div class="table textAlignLeft fullWidth verticalAlignMiddle">
+    <div class="tableRow">
+        <div class="tableCell bold">Pizza</div>
+        <div class="tableCell bold">Small - 6"</div>
+        <div class="tableCell bold">Medium - 12"</div>
+        <div class="tableCell bold">Large - 14"</div>
+    </div>
+    <div class="tableRow">
+        <div class="tableCell">Cheese</div>
+        <div class="tableCell">$3.95</div>
+        <div class="tableCell">$7.95</div>
+        <div class="tableCell">$9.50</div>
+    </div>
+    <div class="tableRow">
+        <div class="tableCell">One Topping</div>
+        <div class="tableCell">$4.95</div>
+        <div class="tableCell">$8.95</div>
+        <div class="tableCell">$9.95</div>
+    </div>
+    <div class="tableRow">
+        <div class="tableCell">Two Toppings</div>
+        <div class="tableCell">$5.45</div>
+        <div class="tableCell">$9.95</div>
+        <div class="tableCell">$10.95</div>
+    </div>
+</div>
+<div class="textAlignCenter">
+    Each extra topping after two toppings costs an extra $0.75.
+</div>
+<form id="orderForm" name="orderForm" method="post" action="/risaspizzas/orderresults">
+    <div class="table">
+        <label class="tableRow bold" for="crustDropdown">Crust:</label>
+        <div class="tableRow">
+            <select class="tableCell" id="crustDropdown" name="crust">
+                <option>Select Your Crust</option>
+                <option>Hand-Tossed Style Pizza</option>
+                <option>Stuffed Crust Pizza</option>
+                <option>Thin Crust Pizza</option>
+            </select>
+            <div id="crustPrice" class="tableCell">
+            </div>
+        </div>
+    </div>
+    <div class="table fullWidth marginTop10">
+        <label class="tableCell bold">Size:</label>
+        <div class="tableCell">
+            <div class="table">
+                <input id="radioSmall" class="tableCell" type="radio" name="size" value="small"/>
+                <label id="radioSmallLabel" class="tableCell" for="radioSmall">Small - 6"</label>
+            </div>
+        </div>
+        <div class="tableCell">
+            <div class="table">
+                <input id="radioMedium" class="tableCell" type="radio" name="size" value="medium"/>
+                <label id="radioMediumLabel" class="tableCell" for="radioMedium">Medium - 12"</label>
+            </div>
+        </div>
+        <div class="tableCell">
+            <div class="table">
+                <input id="radioLarge" class="tableCell" type="radio" name="size" value="large"/>
+                <label id="radioLargeLabel" class="tableCell" for="radioLarge">Large - 14"</label>
+            </div>
+        </div>
+    </div>
+    <div class="table marginTop10">
+        <label class="tableRow bold" id="quantityDiv-label" for="quantityDiv-text">Quantity:</label>
+        <div>
+            <button id="buttonLeft" type="button">&lt;</button>
+            <input id="quantityDiv-text" class="textAlignCenter grayBackground" name ="quantity" type="text" value="1" readonly/>
+            <button id="buttonRight" type="button">&gt;</button>
+        </div>
+    </div>
+
+    <fieldset class="marginTop10">
+        <legend class="bold">Toppings</legend>
+        <div class="table fullWidth">
+            <div class="tableRow">
+                <div class="tableCell">
+                    <p class="underline">Meat</p>
+                    <input id="canadianBacon" name="topping" type="checkbox"/><label for="canadianBacon">Candian Bacon</label><br/>
+                    <input id="chicken" name="topping" type="checkbox"/><label for="chicken">Grilled Chicken</label><br/>
+                    <input id="meatballs" name="topping" type="checkbox"/><label for="meatballs">Meatballs</label><br/>
+                    <input id="pepperoni" name="topping" type="checkbox"/><label for="pepperoni">Pepperoni</label><br/>
+                    <input id="sausage" name="topping" type="checkbox"/><label for="sausage">Sausage</label><br/>
+                </div>
+                <div class="tableCell">
+                    <p class="underline">Veggies and Such</p>
+                    <div class="table">
+                        <div class="tableRow">
+                            <div class="tableCell width1">
+                                <input id="bananaPeppers" class="tableCell" name="topping" type="checkbox" />
+                            </div>
+                            <label for="bananaPeppers" class="tableCell">Banana Peppers</label>
+                        </div>
+                        <div class="tableRow">
+                            <div class="tableCell width1">
+                                <input id="blackOlives" name="topping" type="checkbox" />
+                            </div>
+                            <label for="blackOlives">Black Olives</label>
+                        </div>
+                        <div class="tableRow">
+                            <div class="tableCell width1">
+                                <input id="greenPeppers" name="topping" type="checkbox" />
+                            </div>
+                            <label for="greenPeppers">Green Peppers</label>
+                        </div>
+                        <div class="tableRow">
+                            <div class="tableCell width1">
+                                <input id="redOnions" name="topping" type="checkbox" />
+                            </div>
+                            <label for="redOnions">Red Onions</label>
+                        </div>
+                        <div class="tableRow">
+                            <div class="tableCell width1">
+                                <input id="pineapples" name="topping" type="checkbox" />
+                            </div>
+                            <label for="pineapples">Pineapples</label>
+                        </div>
+                        <div class="tableRow">
+                            <div class="tableCell width1">
+                                <input id="tomatoes" name="topping" type="checkbox" />
+                            </div>
+                            <label for="tomatoes">Tomatoes</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tableRow rowPaddingTop10">
+                <div class="tableCell">
+                    <p class="underline">Seasonings &amp; Spicy</p>
+                    <input id="basil" name="topping" type="checkbox" /><label for="basil">Basil</label><br/>
+                    <input id="garlic" name="topping" type="checkbox" /><label for="garlic">Garlic</label><br/>
+                    <input id="hotGiardiniera" name="topping" type="checkbox" /><label for="hotGiardiniera">Hot Giardiniera</label><br/>
+                    <input id="jalapenos" name="topping" type="checkbox" /><label for="jalapenos">Jalapenos</label><br/>
+                </div>
+                <div class="tableCell">
+                    <p class="underline">Extra Cheeses</p>
+                    <input id="asiago" name="topping" type="checkbox" /><label for="asiago">Asiago</label><br/>
+                    <input id="cheddar" name="topping" type="checkbox" /><label for="cheddar">Cheddar</label><br/>
+                    <input id="mozzarella" name="topping" type="checkbox" /><label for="mozzarella">Mozzarella</label><br/>
+                    <input id="parmasian" name="topping" type="checkbox" /><label for="parmasian">Parmasian</label><br/>
+                    <input id="ricotta" name="topping" type="checkbox" /><label for="ricotta">Ricotta</label><br/>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" name="totalPrice"/>
+        <input type="hidden" name="resultsInput"/>
+    </fieldset>
+    <div id="resultsDiv" class="fullWidth grayBackground padding10 border1 blackBorder">
+    </div>
+    <div id="buttons" class="textAlignCenter marginTop10">
+        <button id="submitButton" type="button">Submit</button>
+        <button id="resetButton" type="button">Reset</button>
+    </div>
+</form>
