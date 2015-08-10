@@ -2,12 +2,23 @@
 <html ng-app="myApp" ng-controller="AppController">
   <head>
     <title>Hi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"/>
     <script src="/bower_components/angular/angular.min.js"></script>
     <script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="/javascripts/app.js"></script>
   </head>
-  <body>
-    <div ui-view></div>
+  <body class="brownBackground century">
+    <img class="absolute top0 left0 zIndex-1" src="/images/background.jpg" alt="Tuscany Background" />
+    <div id="logo" class="maxWidth horizAlign marginBottom-5 paddingLeft1">
+      <img src="/images/Risa's.png" alt="Risa's Pizza's Establishment Logo" />
+    </div>
+    <div class="peachBackground maxWidth horizAlign border7 redBorder padding20">
+      <% include headers/header.ejs %>
+      <% include navs/nav.ejs %>
+      <main ui-view></main>
+      <% include footers/footer.ejs %>
+    </div>
   </body>
 </html>
