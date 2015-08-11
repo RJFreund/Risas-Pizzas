@@ -1,14 +1,4 @@
-var myApp = angular.module('myApp', ['ui.router']);
-myApp.run(
-    ['$rootScope', '$state', '$stateParams',
-        function ($rootScope,   $state,   $stateParams) {
-            $rootScope.$state = $state;
-            $rootScope.$stateParams = $stateParams;
-        }
-    ]
-);
-
-myApp.config(function($stateProvider, $urlRouterProvider) {
+angular.module('myApp').config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise("/");
     $stateProvider
         .state('home', {
@@ -24,7 +14,8 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: '/menu',
             resolve: {
                 getHeaderTitle: function(){return "Risa's Pizzas Menu" }
-            }
+            },
+            controller: 'menuController'
         })
         .state('about', {
             url: '/about',
@@ -41,17 +32,4 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
             url: '/contact',
             templateUrl: '/contact'
         });
-});
-myApp.controller('AppController', ['$scope', '$rootScope', '$filter', function($scope, $rootScope, $filter){
-    $scope.getPageTitle = function(){
-        if ($rootScope.$state.$current.resolve.hasOwnProperty('getTitle'))
-            return $rootScope.$state.$current.resolve.getTitle();
-        return $filter('capitalize')($rootScope.$state.current.name) + " - Risa's Pizzas";
-    };
-}]);
-
-myApp.filter('capitalize', function() {
-    return function(input) {
-        return input.charAt(0).toUpperCase() + input.substr(1);
-    }
 });

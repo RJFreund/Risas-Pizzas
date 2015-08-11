@@ -1,41 +1,23 @@
 <div class="table textAlignLeft fullWidth verticalAlignMiddle">
     <div class="tableRow">
-        <div class="tableCell bold">Pizza</div>
-        <div class="tableCell bold">Small - 6"</div>
-        <div class="tableCell bold">Medium - 12"</div>
-        <div class="tableCell bold">Large - 14"</div>
+        <div ng-repeat="(key, value) in toppingPrices[0]" class="tableCell bold">{{ key }}</div>
     </div>
-    <div class="tableRow">
-        <div class="tableCell">Cheese</div>
-        <div class="tableCell">$3.95</div>
-        <div class="tableCell">$7.95</div>
-        <div class="tableCell">$9.50</div>
-    </div>
-    <div class="tableRow">
-        <div class="tableCell">One Topping</div>
-        <div class="tableCell">$4.95</div>
-        <div class="tableCell">$8.95</div>
-        <div class="tableCell">$9.95</div>
-    </div>
-    <div class="tableRow">
-        <div class="tableCell">Two Toppings</div>
-        <div class="tableCell">$5.45</div>
-        <div class="tableCell">$9.95</div>
-        <div class="tableCell">$10.95</div>
+    <div ng-repeat="toppingPrice in toppingPrices" class="tableRow">
+        <div class="tableCell">{{ toppingPrice.Topping }}</div>
+        <div class="tableCell">{{ "$" + toppingPrice['Small - 6"'] }}</div>
+        <div class="tableCell">{{ "$" + toppingPrice['Medium - 12"'] }}</div>
+        <div class="tableCell">{{ "$" + toppingPrice['Large - 14"'] }}</div>
     </div>
 </div>
 <div class="textAlignCenter">
     Each extra topping after two toppings costs an extra $0.75.
 </div>
-<form id="orderForm" name="orderForm" method="post" action="/risaspizzas/orderresults">
+<form id="orderForm" name="orderForm" method="post" action="#">
     <div class="table">
         <label class="tableRow bold" for="crustDropdown">Crust:</label>
         <div class="tableRow">
             <select class="tableCell" id="crustDropdown" name="crust">
-                <option>Select Your Crust</option>
-                <option>Hand-Tossed Style Pizza</option>
-                <option>Stuffed Crust Pizza</option>
-                <option>Thin Crust Pizza</option>
+                <option ng-repeat="crustType in crustTypes">{{ crustType }}</option>
             </select>
             <div id="crustPrice" class="tableCell">
             </div>
