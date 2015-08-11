@@ -17,7 +17,8 @@
         <label class="tableRow bold" for="crustDropdown">Crust:</label>
         <div class="tableRow">
             <select class="tableCell" id="crustDropdown" name="crust">
-                <option ng-repeat="crustType in crustTypes">{{ crustType }}</option>
+                <option disabled selected>Select Your Crust:</option>
+                <option ng-repeat="crust in crusts">{{ crust.name }}</option>
             </select>
             <div id="crustPrice" class="tableCell">
             </div>

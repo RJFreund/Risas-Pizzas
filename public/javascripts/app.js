@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ui.router']);
+var myApp = angular.module('myApp', ['ui.router', 'ngResource']);
 myApp.run(
     ['$rootScope', '$state', '$stateParams',
         function ($rootScope,   $state,   $stateParams) {

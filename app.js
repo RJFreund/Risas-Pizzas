@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var http = require('http');
 var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+var initializeTables = require('./database/initializeTables');
 
 var app = express();
 
@@ -33,6 +34,9 @@ server.listen(server_port, server_ip_address, function(){
 var io = require('socket.io').listen(server);
 
 var routes = require('./routes/index')(io);
+var api = require('./routes/api');
+
+app.use('/api', api);
 app.use('/', routes);
 app.use('*', routes);
 
