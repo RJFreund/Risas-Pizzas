@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var http = require('http');
 var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
-var initializeTables = require('./database/initializeTables');
+var databaseInitializer = require('./database/initializeTables');
 
 var app = express();
 
@@ -24,7 +24,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/bower_components', express.static(path.join(__dirname, 'bower_components')));
 
-
+databaseInitializer.initializeTables();
 
 var server = http.createServer(app);
 server.listen(server_port, server_ip_address, function(){
