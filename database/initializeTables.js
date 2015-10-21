@@ -1,35 +1,59 @@
 var pg = require('pg');
 var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432';
+var format = require('string-format');
+format.extend(String.prototype);
 
+
+/*
+ var tables = [
+ {
+ name: "Crusts",
+ columns: ['id', 'name', 'price'],
+ columnTypes: ['SERIAL PRIMARY KEY', 'VARCHAR(40)', 'DECIMAL'],
+ data: [
+ [, "Hand-Tossed Style Pizza", 0.50],
+ [, "Stuffed Crust Pizza", 2.00],
+ [, "Thin Crust Pizza", 1.00]
+ ]
+ }
+ ];
+ */
+
+var databaseInitializer = (function(){
+    var instance = {};
+    var initializeTablesArray = [
+        format('' +
+            'CREATE TABLE IF NOT EXISTS Crusts (' +
+            'id SERIAL PRIMARY KEY, ' +
+            'name TEXT, ' +
+            'price DECIMAL' +
+            ')' +
+            '' +
+            'INSERT INTO Crusts (name, price)'
+        )
+    ];
+    instance.initializeTables = function(){
+
+    };
+
+    return instance;
+})();
+
+/*
 var databaseInitializer = {
     initializeTables: function(){
         var tables = [
             {
                 name: "Crusts",
-                columns: [
-                    {
-                        name: "id",
-                        type: "SERIAL PRIMARY KEY"
-                    },
-                    {
-                        name: "name",
-                        type: "VARCHAR(40)"
-                    },
-                    {
-                        name: "price",
-                        type: "DECIMAL"
-                    }
+                columns: ['id', 'name', 'price'],
+                columnTypes: ['SERIAL PRIMARY KEY', 'VARCHAR(40)', 'DECIMAL'],
+                data: [
+                    [, "Hand-Tossed Style Pizza", 0.50],
+                    [, "Stuffed Crust Pizza", 2.00],
+                    [, "Thin Crust Pizza", 1.00]
                 ]
             }
         ];
-        tables[0].rows[0][tables.columns[1]] = 'Hand-Tossed Style Pizza';
-        tables[0].rows[0][tables.columns[2]] = 0.50;
-
-        tables[0].rows[1][tables.columns[1]] = 'Thin Crust Pizza';
-        tables[0].rows[1][tables.columns[2]] = 1.00
-
-        tables[0].rows[2][tables.columns[1]] = 'Stuffed Crust Pizza';
-        tables[0].rows[2][tables.columns[2]] = 2.00;
 
         for (var table in tables) {
             initializeTable(table);
@@ -41,28 +65,29 @@ function initializeTable(table){
     var client = getClient();
     client.connect();
     client.query(
-        'CREATE TABLE IF NOT EXISTS ' +
-        table.name +
-        table.columns,
+        format('CREATE TABLE IF NOT EXISTS {0} {1}', table.name, table.columns ),
         function(err, result){
             done();
             if (err){ console.log(err); return; }
             if (result){
-                console.log(table.name + ' table created successfully');
-                console.log('Populating table ' + table.name);
+                console.log(format('{0} table created successfully', table.name));
+                console.log(format('Populating table {0}', table.name));
                 populateTable(table);
             }
-            console.log( table.name + ' table already exists'); return;
+            console.log(format('{0} table already exists', table.name));
+            return;
         });
 }
 
 function populateTable(table){
-    for (var row in table.rows)
+    for (var rowIndex in table.data)
     {
-        for (var column in table.columns)
+        var rowData = table.data[rowIndex];
+        for (var columnIndex in table.columns)
         {
-            if (column.type.toString().toUpperCase().indexOf("SERIAL") > -1 ||
-                column.type.toString().toLowerCase().indexOf("id") == 0)
+            var column = table.columns[columnIndex];
+            var columnType = table.columnTypes[columnIndex];
+            if (shouldSkipInsertingColumnData(column, columnType, rowData))
             {
                 continue;
             }
@@ -81,5 +106,19 @@ function populateTable(table){
 function getClient(){
     return new pg.Client(connectionString);
 }
+
+function shouldSkipInsertingColumnData(column, columnType){
+    var shouldSkipInsertingColumnData = false;
+    if (columnType.toUpperCase().indexOf("SERIAL") > -1 ||
+        column.toLowerCase().indexOf("id") == 0 ||
+        rowData
+    )
+    {
+        shouldSkipInsertingColumnData = true;
+    }
+    return shouldSkipInsertingColumnData;
+
+}
+*/
 
 module.exports = databaseInitializer;
