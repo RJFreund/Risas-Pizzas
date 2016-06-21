@@ -1,0 +1,35 @@
+<h2 class="textAlignCenter">Let Us Know</h2>
+<div class="indentText paddingTop10">
+    Please use this form to contact us if you have any comments at all about our services.
+    We are always putting our customer's views first to ensure that constructive changes are made in our community.
+    Please note that all form fields are optional.
+</div>
+<form id="contactForm" name="contactForm" class="paddingTop10" method="post" action="">
+    <fieldset class="fullWidth">
+        <legend class="bold">Contact Form</legend>
+        <div class="table fullWidth">
+            <div class="tableRow">
+                <label class="tableCell width1" for="name">Name:</label>
+                <input class="tableCell" id="name" name="name" type="text" />
+            </div>
+            <div class="tableRow rowPaddingTop10">
+                <label class="tableCell" for="email">Email Address:</label>
+                <div class="tableCell">
+                    <input id="email" name="email" type="email" />
+                </div>
+                <span class="tableCell" id="email_error"></span>
+            </div>
+            <div class="tableRow rowPaddingTop10">
+                <label class="tableCell verticalAlignTop" id="comments" for="textbox">Comments:</label>
+                <div class="tableCell">
+                    <textarea name="comments" class="disableResize fullWidth height170" id="textbox"></textarea>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <div class="table horizAlign marginTop10">
+        <input id="submitButton" name="submitButton" class="tableCell marginRight10"  type="button" value="Submit"/>
+        <input class="tableCell" id="reset_form" type="reset" value="Reset" />
+    </div>
+    <input type="hidden" name="botValidation" value="default" />
+</form>
