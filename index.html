@@ -1,32 +1,23 @@
-<!DOCTYPE html>
-<html ng-app="myApp" ng-controller="AppController">
-  <head>
-    <title>{{ getPageTitle() }}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"/>
-    <script src="/bower_components/angular/angular.min.js"></script>
-    <script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-    <script src="/bower_components/angular-resource/angular-resource.min.js"></script>
-    <script src="/javascripts/app.js"></script>
-    <!--<script src="/javascripts/resource.js"></script>-->
-    <script src="/javascripts/filters.js"></script>
-    <script src="/javascripts/controllers/appController.js"></script>
-    <script src="/javascripts/controllers/menuController.js"></script>
-    <script src="/javascripts/states.js"></script>
-  </head>
-  <body class="brownBackground century">
-    <img class="absolute top0 left0 zIndex-1" src="/images/background.jpg" alt="Tuscany Background" />
-    <div id="logo" class="maxWidth horizAlign marginBottom-5 paddingLeft1">
-      <img src="/images/Risa's.png" alt="Risa's Pizza's Establishment Logo" />
-    </div>
-    <div class="peachBackground maxWidth horizAlign border7 redBorder padding20">
-      <header ng-include src="'views/headers/header.html'"></header>
-      <nav ng-include src="'views/navs/nav.html'"></nav>
-      <main ui-view></main>
-      <footer ng-include src="'views/footers/footer.html'"></footer>
-    </div>
-    <script src="/javascripts/contact.js"></script>
-    <!--<script src="/javascripts/menu.js"></script>-->
-  </body>
-</html>
+---
+layout: default
+---
+
+<div class="home">
+
+  <h1 class="page-heading">Posts</h1>
+
+  <ul class="post-list">
+    {% for post in site.posts %}
+      <li>
+        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+
+        <h2>
+          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+        </h2>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+
+</div>
